@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Student Transaction Record</title>
+  <link rel="stylesheet" href="styles/java.css">
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Student Transaction Record</h1>
+
+    <div class="form-group">
+      <input type="text" id="studentName" placeholder="Student Name">
+      <input type="text" id="matricNo" placeholder="Matric Number">
+      <input type="number" id="amount" placeholder="Amount Paid">
+      <button onclick="addTransaction()">Add Record</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Matric Number</th>
+          <th>Amount Paid</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="recordTable"></tbody>
+    </table>
+
+    <div class="total" id="totalAmount">Total: 0</div>
+  </div>
+
+  <script>
+    let total = 0;
+
+    function addTransaction() {
+      const name = document.getElementById('studentName').value;
+      const matric = document.getElementById('matricNo').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+
+      if (name === '' || matric === '' || isNaN(amount)) {
+        alert('Please fill all fields correctly');
+        return;
+      }
+
+      const table = document.getElementById('recordTable');
+      const row = table.insertRow();
+
+      row.insertCell(0).innerText = name;
+      row.insertCell(1).innerText = matric;
+      row.insertCell(2).innerText = amount.toFixed(2);
+
+      const deleteCell = row.insertCell(3);
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = 'Delete';
+      deleteBtn.className = 'delete-btn';
+
+      deleteBtn.onclick = function () {
+        total -= amount;
+        document.getElementById('totalAmount').innerText = 'Total: ' + total.toFixed(2);
+        row.remove();
+      };
+
+      deleteCell.appendChild(deleteBtn);
+
+      total += amount;
+      document.getElementById('totalAmount').innerText = 'Total: ' + tota96 + l.toFixed(2);
+
+      document.getElementById('studentName').value = '';
+      document.getElementById('matricNo').value = '';
+      document.getElementById('amount').value = '';
+    }
+  </script>
+
+</body>
+
+</html>
